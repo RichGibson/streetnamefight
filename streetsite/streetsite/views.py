@@ -26,7 +26,7 @@ def build_query_string(list):
 
 def pastfights(request):
     """ show us past fights with links to refight them """
-    data = Fight.objects.all().orderby('-id')
+    data = Fight.objects.all().order_by('-id')
     return render_to_response('pastfights.html',{'data':data})
 
 def fight(request):
@@ -36,13 +36,14 @@ def fight(request):
     #pdb.set_trace()
     l=[]
     if 'words' in request.GET:
-        words = request.GET['words'].split()
+        words = request.GET['words']
         f = Fight()
         f.word = words
         f.save()
-        l = words.split()
+        l=words.split()
         w = build_query_string(l)
         sql = "select word, count(word) as cnt  from street_word where word in (%s) group by word order by cnt desc" %w
+        #import pdb
         #pdb.set_trace()
         cursor.execute(sql,l)
         data = cursor.fetchall()

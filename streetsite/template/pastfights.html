@@ -3,12 +3,12 @@
   <br>
   You are a fighter!<br>
   <br>
-  Past Batles!
+  Past Battles!
   {% if data %}
     <table border="1">
-      {% for word, cnt in data %}
+      {% for w in data %}
         <tr>
-          <td><a href="/fight?words={{words}}">{{words}}</a></td>
+          <td><a href="/fight?words={{w.word}}">{{w.word}}</a></td>
         </tr>
       {% endfor %}
     </table>
