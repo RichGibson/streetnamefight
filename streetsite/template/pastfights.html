@@ -2,13 +2,13 @@
 {% block content %}
   <br>
   You are a fighter!<br>
+  <br>
+  Past Batles!
   {% if data %}
     <table border="1">
-      <tr><td>Street</td><td>cnt</td></tr>
-      {% for street, cnt in data %}
+      {% for word, cnt in data %}
         <tr>
-          <td><a href="/fid/{{fid}}">{{street}}</a></td>
-          <td>{{cnt}}</td>
+          <td><a href="/fight?words={{words}}">{{words}}</a></td>
         </tr>
       {% endfor %}
     </table>

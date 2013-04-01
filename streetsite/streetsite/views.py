@@ -6,6 +6,7 @@ import os
 import re
 import sys
 from django.db import connection, transaction
+from streetsite.models import Fight
 
 
 def home(request):
@@ -23,13 +24,23 @@ def fid(request,word):
 def build_query_string(list):
     return ','.join(['%s'] * len(list))
 
+def pastfights(request):
+    """ show us past fights with links to refight them """
+    data = Fight.objects.all().orderby('-id')
+    return render_to_response('pastfights.html',{'data':data})
+
 def fight(request):
     connection.text_factory=str
     cursor = connection.cursor()
     #import pdb
+    #pdb.set_trace()
     l=[]
     if 'words' in request.GET:
-        l = request.GET['words'].split()
+        words = request.GET['words'].split()
+        f = Fight()
+        f.word = words
+        f.save()
+        l = words.split()
         w = build_query_string(l)
         sql = "select word, count(word) as cnt  from street_word where word in (%s) group by word order by cnt desc" %w
         #pdb.set_trace()
@@ -56,9 +67,11 @@ def streetword(request,word):
     #sql = "select fid, street, zip from feature where street like '%%' order by zip"
     #import pdb
     #pdb.set_trace()
-    sql = "select fid, street, zip from feature where fid in (select * from streetword where word=?) order by zip"
+    sql = "select street, count(street) from feature where fid in (select fid from street_word where word=%s) order by zip"
+    #sql = "select fid, street, zip from feature where fid in (select * from streetword where word=?) order by zip"
     #print >>sys.stderr, sql
-    cursor.execute(' select fid, street, zip from feature where fid in (select fid from street_word where word=%s) order by zip ',[word])
+    cursor.execute(sql, [word])
+    #cursor.execute(sql' select fid, street, zip from feature where fid in (select fid from street_word where word=%s) order by zip ',[word])
     #cursor.execute(sql,[word])
     #cursor.execute(sql,[word])
     data = cursor.fetchall()

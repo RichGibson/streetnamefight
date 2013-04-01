@@ -10,6 +10,7 @@ urlpatterns = patterns('',
     url(r'home', 'streetsite.views.home', name='home'),
     url(r'fid/(.*)', 'streetsite.views.fid', name='fid'),
     url(r'fight', 'streetsite.views.fight', name='fight'),
+    url(r'pastfights', 'streetsite.views.pastfights', name='pastfights'),
     url(r'streetword/(.+)', 'streetsite.views.streetword', name='streetword'),
     # url(r'^streetsite/', include('streetsite.foo.urls')),
 
