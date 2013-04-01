@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+  <br>
+  <form action="/fight">
+        Enter some Fighting Words! Seperate with spaces
+        <input type="textarea" name="words">
+        <input type="submit" name="foo">
+  </form>
+  (multi words don't work yet)
+  <hr>
+  You are a fighter!<br>
+  {% if data %}
+      {% for w,c in data %}
+          <a href="/streetword/{{w}}">{{w}} : {{c}}</a><br>
+      {% endfor %}
+  {% else %}
+      no data?
+  {% endif %}
+(and spencer got a burrito)
+{% endblock %}

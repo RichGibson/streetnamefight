@@ -1,0 +1,34 @@
+{% load url from future %}
+<!DOCTYPE html >
+<html>
+<head>
+    <title>Street Name Fight!</title>
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="stylesheet" type="text/css" href="/css/base.css">
+</head>
+<body>
+<div class="outer_container ">
+    <div class="container">
+        <div class="top_header">
+          <div style="float: left;">
+            <img src="/images/streetnamefight.png" alt="Street Name Fight!" style="border:0;">
+          </div>
+        </div><!-- top_header -->
+        <section class="sidebar ">
+            {% if sidebar_template %}
+                {% include sidebar_template %}    
+            {% else %}
+                {% include 'default_sidebar.html' %}            
+            {% endif %}
+        </section><!-- sidebar -->        
+        <div class="main_content ">
+            <div style="float: left;">
+            {% block title %}{% endblock %}
+            {% block content %}
+            {% endblock %}
+            </div>
+        </div><!-- main_content -->
+    </div><!-- container -->    
+</div><!-- outer_container -->    
+</body>
+</html>

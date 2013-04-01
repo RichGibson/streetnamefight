@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+  <br>
+  You are a fighter!<br>
+  {% if data %}
+    <table border="1">
+      <tr><td>Street</td><td>zip</td></tr>
+      {% for fid, street, zip in data %}
+        <tr>
+          <td><a href="/fid/{{fid}}">{{street}}</a></td>
+          {% if zip %}
+            <td><a href="/zip/{{zip}}">{{zip}}</a></td>
+          {% else %}
+            <td></td>
+          {% endif %}
+        </tr>
+      {% endfor %}
+    </table>
+  {% else %}
+      no data?
+  {% endif %}
+<hr>
+(and spencer got a burrito)
+{% endblock %}

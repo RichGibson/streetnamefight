@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+  <br>
+  You are a fighter!<br>
+  One fid.
+  {% if data %}
+    <table border="1">
+      <tr>
+        <td>Street</td><td>zip</td>
+        <td>City</td><td>State</td>
+        <td>Lat</td><td>Lon</td>
+        <td>County</td>
+      </tr>
+      {% for fid, street, zip , city, state, lat, lon, fips_county in data %}
+        <tr>
+          <td><a href="/fid/{{fid}}">{{street}}</a></td>
+          {% if zip %}
+            <td><a href="/zip/{{zip}}">{{zip}}</a></td>
+          {% else %}
+            <td></td>
+          {% endif %}
+          <td><a href="/fid/{{fid}}">{{city}}</a></td>
+          <td><a href="/fid/{{fid}}">{{state}}</a></td>
+          <td><a href="/fid/{{fid}}">{{lat}}</a></td>
+          <td><a href="/fid/{{fid}}">{{lon}}</a></td>
+          <td><a href="/fid/{{fid}}">{{fips_county}}</a></td>
+        </tr>
+      {% endfor %}
+    </table>
+  {% else %}
+      no data?
+  {% endif %}
+<hr>
+(and spencer got a burrito)
+{% endblock %}
