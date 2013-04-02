@@ -6,9 +6,10 @@
         <input type="textarea" name="words">
         <input type="submit" name="foo">
   </form>
-  (multi words don't work yet)
+  (Case matters until I fix it...mostly Cap first letter)
   <hr>
   You are a fighter!<br>
+<img src="http://streetnamefight.com/img/comic/Comic_Characters_Fighter_clip_art_small.png"><br>
   {% if data %}
       {% for w,c in data %}
           <a href="/streetword/{{w}}">{{w}} : {{c}}</a><br>
@@ -16,5 +17,16 @@
   {% else %}
       no data?
   {% endif %}
+<br>
+Classic Battles!<br>
+<a href="http://streetnamefight.com/fight?words=Mercury%20Venus%20Earth%20Astroid%20Astroids%20Mars%20Jupiter%20Saturn%20Uranus%20Neptune%20Pluto">
+<img src="/img/solarsystem1-250x200.jpg" width="150"><!--The Planets (including Pluto you haters)--></a>
+
+<a href="http://streetnamefight.com/fight?words=Obama+Easter+Bunny&foo=Submit+Query">
+<img src="http://i2.mirror.co.uk/incoming/article785242.ece/ALTERNATES/s615b/President+Barack+Obama+stands+next+to+the+Easter+Bunny+during+the+singing+of+the+National+Anthem,+at+the+White+House+in+Washington" width="150"><!-- Obama versus the Easter Bunny! --></a>
+<hr>
+Street Name Fight resulted from an idle conversation over Mexican
+Food. It was created by Sophia and Rich. Shower us with love :-)
+<hr>
 (and spencer got a burrito)
 {% endblock %}

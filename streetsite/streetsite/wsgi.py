@@ -16,7 +16,7 @@ framework.
 import os
 import sys
 
-sys.path.append("/home/http/streetnamefight/streetsite")
+sys.path.append("/home/www/streetnamefight/streetsite")
 #os.environ.setdefault("DJANGO_SETTINGS_MODULE", "streetsite.settings")
 os.environ["DJANGO_SETTINGS_MODULE"]="streetsite.settings"
 

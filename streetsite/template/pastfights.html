@@ -5,10 +5,14 @@
   <br>
   Past Battles!
   {% if data %}
-    <table border="1">
-      {% for w in data %}
+    <table border="0">
+      <tr>
+        <td>Times fought</td>
+        <td>Fighting Words</td></tr>
+      {% for w,cnt in data %}
         <tr>
-          <td><a href="/fight?words={{w.word}}">{{w.word}}</a></td>
+          <td>{{cnt}}</td>
+          <td><a href="/fight?words={{w}}">{{w}}</a></td>
         </tr>
       {% endfor %}
     </table>

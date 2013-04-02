@@ -2,30 +2,23 @@
 {% block content %}
   <br>
   You are a fighter!<br>
-  One fid.
   {% if data %}
     <table border="1">
       <tr>
         <td>Feature ID</td>
         <td>Street</td><td>zip</td>
-        <td>City</td><td>State</td>
-        <td>Lat</td><td>Lon</td>
-        <td>County</td>
+        <td>Number of Segments</td>
       </tr>
-      {% for fid, street, zip , city, state, lat, lon, fips_county in data %}
+      {% for fid, street, zip, cnt in data %}
         <tr>
           <td><a href="/fid/{{fid}}">{{fid}}</a></td>
-          <td><a href="/fid/{{fid}}">{{street}}</a></td>
+          <td><a href="/street/{{street}}">{{street}}</a></td>
           {% if zip %}
             <td><a href="/zip/{{zip}}">{{zip}}</a></td>
           {% else %}
             <td></td>
           {% endif %}
-          <td><a href="/fid/{{fid}}">{{city}}</a></td>
-          <td><a href="/fid/{{fid}}">{{state}}</a></td>
-          <td><a href="/fid/{{fid}}">{{lat}}</a></td>
-          <td><a href="/fid/{{fid}}">{{lon}}</a></td>
-          <td><a href="/fid/{{fid}}">{{fips_county}}</a></td>
+          <td>{{cnt}}</td>
         </tr>
       {% endfor %}
     </table>
