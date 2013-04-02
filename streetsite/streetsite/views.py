@@ -18,6 +18,12 @@ def fid(request,word):
     """ look up a fid in the feature table """
     connection.text_factory=str
     cursor = connection.cursor()
+    sql = """
+            select f.fid, f.street, f.zip, count(f.fid) as cnt 
+            from feature f, edge e, feature_edge fe 
+            where f.fid=fe.fid and e.tlid=fe.tlid and f.fid=857307 
+            group by f.fid, f.zip order by f.street
+     """
 
     cursor.execute(' select f.fid, f.street, f.zip, p.city, p.state, p.lat, p.lon, p.fips_county from feature f, place p where f.zip=p.zip and f.fid=%s', [word])
     data = cursor.fetchall()
@@ -43,7 +49,7 @@ def zip(request,zip):
     sql = """
             select f.fid, f.street, f.zip, count(f.fid) as cnt 
             from feature f, edge e, feature_edge fe 
-            where f.fid=fe.fid and e.tlid=fe.tlid and f.fid=857307 
+            where f.fid=fe.fid and e.tlid=fe.tlid and f.zip=%s
             group by f.fid, f.zip order by f.street
      """
 
@@ -51,7 +57,23 @@ def zip(request,zip):
     cursor.execute(sql, [zip])
     #cursor.execute(' select f.fid, f.street, f.zip, p.city, p.state, p.lat, p.lon, p.fips_county from feature f, place p where f.zip=p.zip and f.street=%s', [street])
     data = cursor.fetchall()
-    return render_to_response('zip.html', {'data':data} )
+
+    sql = """
+            select  count(distinct f.fid) as street_count, 
+            count(distinct e.tlid) as segment_count 
+            from feature f, edge e, feature_edge fe 
+            where f.fid=fe.fid and e.tlid=fe.tlid and f.zip=%s;
+          """
+
+    cursor.execute(sql, [zip])
+    totals = cursor.fetchall()
+
+    return render_to_response('zip.html', {'data':data, 'totals':totals} )
+
+def zip_form(request):
+    if 'zip' in request.GET:
+        return zip(request, request.GET['zip'])
+
 
 def build_query_string(list):
     return ','.join(['%s'] * len(list))

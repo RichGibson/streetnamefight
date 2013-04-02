@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-  <br>
-  You are a fighter!<br>
+  <h2>Streets in a zip code</h2>
   {% if data %}
     <table border="1">
       <tr>
@@ -20,6 +19,9 @@
           {% endif %}
           <td>{{cnt}}</td>
         </tr>
+      {% endfor %}
+      {% for total_streets, total_segments in totals %}
+        <tr><td colspan="4"> Total Streets {{total_streets}} Total Segments (Blocks) {{total_segments}} </td></tr>
       {% endfor %}
     </table>
   {% else %}
