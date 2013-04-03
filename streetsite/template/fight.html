@@ -3,7 +3,7 @@
   <br>
   <form action="/fight">
         Enter your Fighting Words! 
-        <input type="textarea" name="words">
+        <input type="textarea" rows="2" cols="50" name="words" value="{{words}}">
         <input type="submit" name="foo">
         Separate words with spaces
   </form>
@@ -21,16 +21,29 @@
       {% for w,c in data %}
           <a href="/streetword/{{w}}">{{w}} : {{c}}</a><br>
       {% endfor %}
+      <hr>
+      Copy this fight into Twitter: <br>
+{% for w,c in data %}{{w}} ({{c}}) {% endfor %}
+{{fightlink}} #streetnamefight
   {% else %}
       no data?
   {% endif %}
 <br>
+<hr>
 Classic Battles!<br>
 <a href="http://streetnamefight.com/fight?words=Mercury%20Venus%20Earth%20Astroid%20Astroids%20Mars%20Jupiter%20Saturn%20Uranus%20Neptune%20Pluto">
 <img src="/img/solarsystem1-250x200.jpg" width="150"><!--The Planets (including Pluto you haters)--></a>
 
 <a href="http://streetnamefight.com/fight?words=Obama+Easter+Bunny&foo=Submit+Query">
 <img src="http://i2.mirror.co.uk/incoming/article785242.ece/ALTERNATES/s615b/President+Barack+Obama+stands+next+to+the+Easter+Bunny+during+the+singing+of+the+National+Anthem,+at+the+White+House+in+Washington" width="150"><!-- Obama versus the Easter Bunny! --></a>
+<a href="http://streetnamefight.com/fight?words=Antioch+Ararat+Bethany+Bethel+Bethlehm+Canaan+Carmel+Corinth+Eden+Emmaus+Ephesus+Galatia+Goshen+Hebron+Israel+Jericho+Jurusalem+Jordan+Lebanon+Hermon+Moab+Nazareth+Nineveh+Ophir+Palestine+Patmos+Rehoboth+Salem+Shiloh+Shushan+Tyre+Zion">Bible names in America!</a>
+<hr>
+<h3>Some links</h3>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Toponymy">Toponymy (Wikipedia)</a>
+<li><a href="https://en.wikipedia.org/wiki/Biblical_toponyms_in_the_United_States">Biblical toponyms in the Unites States (Wikipedia)</a>
+<li><a href="http://geonames.usgs.gov/pls/gnispublic">Geographic Names Information Service</a>
+</ul>
 <hr>
 Street Name Fight resulted from an idle conversation over Mexican
 Food. It was created by Sophia and Rich. Shower us with love :-)

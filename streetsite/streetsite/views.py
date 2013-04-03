@@ -34,7 +34,7 @@ def street(request,street):
     connection.text_factory=str
     cursor = connection.cursor()
 
-    cursor.execute(' select f.fid, f.street, f.zip, p.city, p.state, p.lat, p.lon, p.fips_county from feature f, place p where f.zip=p.zip and f.street=%s', [street])
+    cursor.execute(' select f.fid, f.street, f.zip, p.city, p.state, p.lat, p.lon, p.fips_county from feature f, place p where f.zip=p.zip and f.street=%s order by f.zip', [street])
     data = cursor.fetchall()
     return render_to_response('fid.html', {'data':data} )
 
@@ -112,14 +112,17 @@ def fight(request):
         data = cursor.fetchall()
         
     else:
+        words = ''
         w = """'Washington', 'Adams','Jefferson','Madison','Monroe', 'Adams', 'Jackson','Buren','Harrison', 'Tyler','Polk','Taylor','Filmore','Pierce','Buchanan','Lincoln','Johnson','Grant','Hayes','Garfield','Arthur','Cleveland', 'Harrison','McKinkley','Mckinley','Roosevelt','Wilson','Harding','Taft','Coolidge','Hoover','Truman','Eisenhower','Kennedy','Nixon','Ford','Carter','Reagan','Bush','Clinton','Obama'"""
         sql = "select word, count(word) as cnt  from street_word where word in (%s) group by word order by cnt desc"
         cursor.execute(sql,[w])
         data = cursor.fetchall()
-    # Data retrieval operation - no commit required
-    
+   
+    fightlink="""  http://streetnamefight.com/fight?words=%s """ % "+".join(words.split())
+ 
     #sql = "select word, count(word) as cnt  from street_word where word in ('Love', 'Dreams','Wisdom','Money','Truth') group by word order by cnt desc"
-    return render_to_response('fight.html', {'data':data} )
+    
+    return render_to_response('fight.html', {'data':data,'words':words, 'fightlink':fightlink} )
     #return HttpResponse(data, mimetype='text/html')
 
 def streetword(request,word):
