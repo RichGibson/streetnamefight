@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+  <br>
+  Spammers should just die in a fire :-/ 
+  <br>
+  {% if data %}
+    <table border="0">
+      <tr>
+        <td>ip</td>
+        <td>count spam posts</td></tr>
+      {% for ip,cnt in data %}
+        <tr>
+          <td>{{ip}}</td>
+          <td>{{cnt}}</td>
+        </tr>
+      {% endfor %}
+    </table>
+  {% else %}
+      no data?
+  {% endif %}
+<hr>
+(and spencer got a burrito)
+{% endblock %}
